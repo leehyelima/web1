@@ -1,0 +1,46 @@
+{%extends 'main/base.html'%}
+
+{%load static%}
+
+{%block contents%}
+
+
+
+    <h1 class="section-title"><span class="highlight">SIGN</span> UP</h1>
+      <div class="container">
+      {% if error %}
+        <div class="alert alert-danger mt-3">
+            {{ error }}
+        </div>
+      {% endif %}
+
+      <form method="post" action="{% url 'accounts:sign_up' %}">
+          {% csrf_token %}
+
+          <div class="mb-3 col-md-6">
+              <label class="form-label" for="username">ID</label>
+              <input class="form-control" id="username" type="text" name="username" placeholder="아이디">
+          </div>
+
+          <div class="mb-3 col-md-6">
+              <label class="form-label" for="password">PASSWORD</label>
+              <input class="form-control" id="password" type="password" name="password" placeholder="비밀번호">
+          </div>
+
+          <div class="mb-3 col-md-6">
+              <label class="form-label" for="password_check">PASSWORD recheck</label>
+              <input class="form-control" id="password_check" type="password" name="password_check" placeholder="비밀번호 확인">
+          </div>
+
+
+
+          <div class="mb-3">
+              <button type="submit" class="btn btn-secondary">회원가입</button>
+          </div>
+      </form>
+  </div>
+
+
+
+
+{%endblock%}

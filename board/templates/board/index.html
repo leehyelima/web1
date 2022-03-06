@@ -1,0 +1,46 @@
+{%extends 'main/base.html'%}
+
+{%load static%}
+
+{%block contents%}
+
+{{ body|safe }}
+
+<table class="table table-hover">
+    <thead style ="background-color: #ffb24b; color: white;">
+
+        <td>subject</td>
+        <td>author</td>
+        <td>like</td>
+    </thead>
+    <tbody style="color: gray;">
+        {%for i in posts%}
+        <tr>
+        <td><a href= "/board/detail/{{i.id}}" style="color: gray;">{{i.subject}}</a></td>
+        <td>{{i.user.get_username}}</td>
+        <td>0</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+<table>
+    <td>
+    <nav style= "min-width: 300px; max-width: 500px;">
+        <div class="container-fluid">
+          <form class="d-flex" action ="{%url 'board:search' keyword='keyword'%}">
+            <input class="form-control me-2" type="search" placeholder="Search" id="keyworld" name ="keyword" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      </td>
+      <td style="width: max-width;"></td>
+    <td style="width: 68px;"><a href="{%url 'board:create'%}">
+        <button type="button" class="btn btn-secondary">글쓰기</button></a></td>
+</div>
+
+
+
+
+{%endblock%}

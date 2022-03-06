@@ -1,0 +1,33 @@
+{%extends 'main/base.html'%}
+
+{%load static%}
+
+{%block contents%}
+{{ body|safe }}
+<div class='container'>
+    <h3>New Post</h3>
+    <form method="POST" action="{% url 'board:create'%}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class='mb-3 col-md-10'>
+            <label class="form-label" for="subject">subject</label>
+            <input type="text" class="form-control" name ="subject" id="subject">
+        </div>
+        <div class='mb-3 col-md-10'>
+            <label class="form-label" for="body">body</label>
+            <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-secondary">submit</button>
+        <a href="{%url 'board:list'%}">
+            <button type="button" class="btn btn-secondary">list</button></a>
+    </form>
+
+</div>
+
+
+
+
+
+
+{%endblock%}

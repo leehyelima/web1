@@ -1,0 +1,63 @@
+{%extends 'main/base.html'%}
+
+{%load static%}
+
+{%block contents%}
+{{ body|safe }}
+
+{% if posts.image %}
+<div class='mb-3 col-md-6'>
+    <img class="img-fluid" src="{{ posts.image.url }}" alt="Post Image">
+</div>
+{% endif %}
+
+
+<table>
+    <thead>
+        <tr>
+            <td><div>
+                <label class="form-label" for="subject">subject</label>
+                <input type="text" class="form-control" name ="subject" id="subject" value="{{post.subject}}" readonly class="form-control-plaintext">
+            </div></td>
+        </tr>
+        <tr>
+            <td><div>
+                <label class="form-label" for="author">author</label>
+                <input type="text" class="form-control" name ="author" id="author" value="{{post.user.get_username}}" readonly class="form-control-plaintext">
+            </div></td>
+        </tr>
+        <tr>
+            <td><div>
+                <label class="form-label" for="date">date</label>
+                <input type="text" class="form-control" name ="date" id="date" value="{{post.created_at}}" readonly class="form-control-plaintext">
+            </div></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div>
+                <label class="form-label" for="body">body</label>
+                <textarea class="form-control" name="body" id="body" cols="30" rows="10" readonly>{{ post.body }}</textarea>
+            </div></td>
+        </tr>
+        <tr>
+            <td>좋아요 수 : {{posts.liked_users.count}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                {%if user == post.user%}
+                <a href="{%url 'board:edit' post.id%}"><button class="btn btn-secondary">edit</button></a>
+                <a href="{%url 'board:delete' post.id%}"><button class="btn btn-secondary">delete</button></a>
+                
+                {%endif%}
+                <a href="{%url 'board:list'%}"><button class="btn btn-secondary">list</button></a></td>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+
+{%endblock%}
